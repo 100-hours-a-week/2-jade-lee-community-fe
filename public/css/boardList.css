@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width:500px;
+    margin:auto;
+}
+
+.profile-img{
+    text-decoration: none; 
+    font-size: 35px; 
+}
+.content-writer{
+    width: 30px;
+    height: 30px;
+}
+hr {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    flex-shrink: 0; 
+}
+
+.profile-img{
+    text-decoration: none; 
+    font-size: 24px;
+}
+
+.post-list{
+    width: 500px;
+}
+
+.post-container{
+    border: 1px solid rgb(198, 191, 191);
+    border-radius: 10px;
+
+}
+.post-item{
+    padding:10px;
+ }
+ .info-flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+ }
+ .author-flex{
+    display:flex;
+    align-items: center;
+ }
+ .author-flex img{
+    border-radius:50%;
+ }
+
+
+
+.create-post-button {
+    background-color: #ACA0EB; 
+    color: white; 
+    border: none; 
+    border-radius: 15px; 
+    padding: 9px 30px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    float:right;
+}
+
+/* 호버 상태 */
+.create-post-button:hover {
+    background-color: #7F6AEE;
+}
+
+/* 비호버 상태 (기본) */
+.create-post-button:active {
+    background-color: #ACA0EB;
+}
+
+
+/* 드롭다운 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    background-color: rgb(177, 177, 177);
+    min-width: 160px;
+    z-index: 1;
+    margin-top: 5px; 
+    right: 10px;
+}
+
+.dropdown-content a {
+    color: black; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: lightgray;
+}
+
+.show {
+    display: block; 
+}

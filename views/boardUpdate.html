@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티 페이지</title>
+    <link rel="stylesheet" href="/css/boardWrite.css">
+</head>
+<header>
+    <a href="/boardList" class="back-arrow">&lt;</a>
+    <h1 class="header-title">아무 말 대잔치</h1>
+    <a href="/myinfo" class="profile-img">
+        <img src="/img/profile.png" alt="내 정보로 이동" style="width: 24px; height: 24px;">
+    </a>
+</header>
+<hr>
+<body>
+    <h2 class="write-title">게시글 수정</h2>
+    <div class="container">
+        <form id="boardWriteForm">
+            <div class="form-group-content">
+                <label for="title">제목*</label><br><br>
+                <input type="text" id="title" name="title" class="title-input" placeholder="제목을 입력해주세요. (최대 26글자)" required>
+            </div><br>
+            <div class="form-group">
+                <label for="content">내용*</label><br><br>
+                <input type="text" id="content" name="content" class="content-input" placeholder="내용을 입력해주세요." required>
+            </div><br>
+            <div class="form-group-content">
+                &nbsp;이미지<br>
+                <input type="file" class="login-button"/>
+            </div><br>
+            <div class="button-container">
+                <button type="submit" class="write-button">수정하기</button>
+            </div>
+        </form>
+    </div>
+    <script src="/js/boardUpdate.js"></script>
+</body>
+</html>

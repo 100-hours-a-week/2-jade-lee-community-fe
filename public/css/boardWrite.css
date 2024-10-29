@@ -1,0 +1,70 @@
+/* 전체 컨테이너 설정 */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width:500px;
+    margin:auto;
+}
+hr {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    flex-shrink: 0; 
+}
+.back-arrow {
+    text-decoration: none; 
+    font-size: 24px; 
+}
+.write-title{
+    text-align: center;
+}
+#boardWriteForm{
+    width: 100%;
+}
+.title-input {
+    width: 100%; /* 제목 입력 공간 너비 */
+    box-sizing: border-box; 
+    height: 40px; /* 제목 입력 공간 높이 */
+}
+
+.content-input {
+    width: 100%; /* 내용 입력 공간 너비 */
+    box-sizing: border-box; 
+    height: 280px; /* 내용 입력 공간 높이 */
+}
+.button-container {
+    display: flex;
+    justify-content: center; /* 버튼을 중앙에 위치 */
+    margin-top: 20px; /* 버튼과 위쪽 요소 간격 조정 */
+}
+
+.write-button {
+    background-color: #ACA0EB; 
+    color: white; 
+    border: none; 
+    border-radius: 9px; 
+    padding: 9px 30px; /* 버튼 내부 여백 */
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    width: 330px; /* 버튼 너비 */
+    height: 40px; /* 버튼 높이 */
+}
+
+/* 호버 상태 */
+.write-button:hover {
+    background-color: #7F6AEE;
+}
+
+/* 비호버 상태 (기본) */
+.write-button:active {
+    background-color: #ACA0EB;
+}
