@@ -87,8 +87,24 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
-app.get('/board', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'board.html'));
+app.get('/boardList', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'boardList.html'));
+});
+
+app.get('/boardWrite', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'boardWrite.html'));
+});
+
+app.get('/boardDetail', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'boardDetail.html'));
+});
+
+app.get('/boardUpdate', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'boardUpdate.html'));
+});
+
+app.get('/myinfo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'myinfo.html'));
 });
 
 // 서버 실행

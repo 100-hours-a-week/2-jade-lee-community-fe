@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    width: 400px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width:500px;
+    margin:auto;
+}
+
+.profile-img{
+    text-decoration: none; 
+    font-size: 35px; 
+}
+.content-writer{
+    width: 30px;
+    height: 30px;
+}
+hr {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    flex-shrink: 0; 
+}
+
+.profile-img{
+    text-decoration: none; 
+    font-size: 24px;
+}
+
+
+/* 드롭다운 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    background-color:  #D9D9D9;
+    min-width: 120px;
+    z-index: 1;
+    margin-top: 6px; 
+    right: 10px;
+    text-align: center; 
+    font-size: 12px;
+}
+
+.dropdown-content a {
+    color: black; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: lightgray;
+}
+
+.show {
+    display: block; 
+}
+
+.subInfo {
+    justify-content: left;
+    float: left;
+    margin-right: auto;
+}
+
+#imagePreview {
+    width: 149px;
+    height: 149px;
+    border-radius: 55%;
+    cursor: pointer;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.email {
+    margin-right: auto;
+}
+.nickname {
+    margin-right: auto;
+}
+.nickname input {
+    width: 400px;
+    height: 30px;
+}

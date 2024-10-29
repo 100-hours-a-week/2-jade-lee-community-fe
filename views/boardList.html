@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="stylesheet" href="/css/boardList.css">
+</head>
+<header>
+    <div></div>
+    <h1 class="header-title">아무 말 대잔치</h1>
+    <div class="dropdown">
+        <a href="javascript:void(0);" class="profile-img">
+            <img src="/img/profile.png" alt="내 정보로 이동" style="width: 24px; height: 24px;">
+        </a>
+        <div class="dropdown-content">
+            <a href="/myinfo">회원정보수정</a>
+            <a href="/change-password">비밀번호수정</a>
+            <a href="/logout">로그아웃</a>
+        </div>
+    </div>
+</header>
+<hr>
+<body>
+    <div class="container">
+        <div class="welcome-text">안녕하세요,</div>
+        <div class="welcome-text">아무 말 대잔치 게시판 입니다.</div>
+        <br>
+        
+        <div class="post-list">
+            <button class="create-post-button">게시물 작성</button>
+            <br><br><br>
+            <div class="post-container">
+                <div class="post-item">
+                    <h3 class="post-title" id="post1">제목 1</h3>
+                    <div class="info-flex">
+                        <div class="post-info1">좋아요 0 댓글 0 조회수 0</div>
+                        <div class="post-info2">2021-01-01 00:00:00</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="post-item author-flex">
+                    <img src="/img/profile.png" class="content-writer"/>
+                    <h4>&nbsp;&nbsp;더미 작성자 1</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="/js/boardList.js"></script>
+</body>
+</html>
