@@ -63,7 +63,7 @@ hr {
 .button-container {
     display: flex;
     justify-content: center; 
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 .write-button {
@@ -71,11 +71,11 @@ hr {
     color: white; 
     border: none; 
     border-radius: 9px; 
-    padding: 9px 30px; 
+    padding: 9px 30px;
     cursor: pointer; 
     transition: background-color 0.3s; 
-    width: 355px;
-    height: 33px;
+    width: 355px; 
+    height: 33px; 
     font-size: 14px;
     font-weight: 700;
 }

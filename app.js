@@ -36,17 +36,17 @@ const db = mysql.createConnection({
 });
 
 // 미들웨어 설정
-app.use(timeout('5s')); // 요청 타임아웃을 5초로 설정
-app.use(express.json()); // JSON 요청 본문 처리
-app.use(helmet()); // 기본 CSP 설정
+app.use(timeout('5s')); 
+app.use(express.json()); 
+app.use(helmet()); 
 
 // 속도 제한 설정
 const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 1분
-    max: 100, // 최대 100 요청
+    windowMs: 1 * 60 * 1000, 
+    max: 100, 
     message: '너무 많은 요청을 보내셨습니다. 잠시 후 다시 시도해 주세요.'
 });
-app.use(limiter); // 모든 요청에 대해 속도 제한 적용
+app.use(limiter); 
 
 // SQL 쿼리 실행 및 콘솔 로깅 함수
 function executeQuery(sql, params, res) {
@@ -105,6 +105,10 @@ app.get('/boardUpdate', (req, res) => {
 
 app.get('/myinfo', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'myinfo.html'));
+});
+
+app.get('/changePassword', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'changePassword.html'));
 });
 
 // 서버 실행

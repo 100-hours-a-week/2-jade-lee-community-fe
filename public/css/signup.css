@@ -2,20 +2,75 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px;
+    padding-top: 70px;
 }
+header {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width:500px;
+    margin:auto;
+}
+.header-title{
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+}
+hr {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    flex-shrink: 0; 
+}
+.profile-img{
+    text-decoration: none; 
+    font-size: 35px; 
+}
+.profile-img img{
+    width: 36px;
+    height: 36px;
+}
+.back-arrow {
+    text-decoration: none; 
+    font-size: 24px; 
+}
+
 
 .login-title {
     text-align: center; 
     margin-bottom: 20px; 
 }
 
+.login-title{
+    font-size: 32px;
+    font-weight: 700;
+}
+.login-button{
+    font-size: 14px;
+    font-weight: 700;
+  }
+.email, .password{
+font-size: 15px;
+font-weight: 700;
+}
+.signup-link{
+font-size: 14px;
+font-weight: 400;
+}
 .form-group {
     margin-bottom: 15px;
-    width: 100%; 
+    width: 355px; 
     max-width: 400px; 
 }
-
+.form-group label{
+    font-size: 15px;
+    font-weight: 700;
+}
+.back-arrow {
+    margin-left: 20px;
+    text-decoration: none; 
+    font-size: 24px; 
+}
 .form-group input {
     width: 100%; 
     padding: 10px; 
@@ -31,6 +86,16 @@
     border: none;
     cursor: pointer; 
 }
+/* 호버 상태 */
+.signup-button:hover{
+    background-color: #7F6AEE;
+  }
+  
+  /* 비호버 상태 (기본) */
+  .signup-button:active{
+    background-color: #ACA0EB;
+  }
+
 
 .form-footer {
     text-align: center;
@@ -50,11 +115,11 @@
 
 /* 프로필 이미지 스타일 */
 #imagePreview {
-    width: 100px; /* 원하는 크기로 설정 */
+    width: 100px; 
     height: 100px;
-    border-radius: 50%; /* 원형으로 만들기 */
-    cursor: pointer; /* 클릭 가능하게 설정 */
-    object-fit: cover; /* 이미지를 잘 맞춰서 보여줌 */
+    border-radius: 50%; 
+    cursor: pointer;
+    object-fit: cover; 
 }
 
 /* 숨겨진 파일 선택 버튼 */
@@ -76,26 +141,44 @@
     border-radius: 50%;
     cursor: pointer;
     object-fit: cover;
-    display: inline-block; /* inline-block으로 변경하여 중앙에 위치하도록 설정 */
+    display: inline-block;
 }
 
 
-header {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between; 
-    width:500px;
-    margin:auto;
+.inputGroup{
+    margin-bottom: 100px;
 }
 
-.back-arrow {
-    text-decoration: none; 
-    font-size: 24px; 
+
+
+/* 드롭다운 */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-hr {
-    width: 100%;
-    border: 1px solid #ccc;
-    margin: 10px 0;
-    flex-shrink: 0; 
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    background-color:  #D9D9D9;
+    min-width: 120px;
+    z-index: 1;
+    margin-top: 6px; 
+    right: 10px;
+    text-align: center; 
+    font-size: 12px;
+}
+
+.dropdown-content a {
+    color: black; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: lightgray;
+}
+.dropdown-content.show {
+    display: block;
 }

@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById('boardWriteForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        window.location.href = '/boardList'; 
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert("비밀번호가 수정되었습니다!"); 
+        window.location.href = '/myinfo'; 
     });
 
     // 드롭다운 메뉴 기능 추가
