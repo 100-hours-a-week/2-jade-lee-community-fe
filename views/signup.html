@@ -23,33 +23,49 @@
     </div>
 </header>
 <hr>
-
 <body>
     <div class="container">
         <h2 class="login-title">회원가입</h2>
         <form id="loginForm">
-            <div class="form-group" style="position: relative; text-align: center;">
-                <label id="profileImageLabel" for="profileImage">프로필 사진</label><br><br>
-                <img id="imagePreview" src="/img/117885.png" alt="프로필 이미지 미리보기" style="cursor: pointer;">
-                <input type="file" id="profileImage" name="profileImage" accept="image/*" style="display: none;">
-            </div>
+            <div class="form-group">
+                <label id="profileImageLabel" for="profileImage">프로필 사진</label>
+                <div class="helper-text profile-image"> <!-- profile-image 클래스를 추가 -->
+                    * 프로필 사진을 추가해주세요.
+                </div><br>
+                <div class="image-container">
+                    <img id="imagePreview" src="/img/117885.png" alt="프로필 이미지 미리보기">
+                    <input type="file" id="profileImage" name="profileImage" accept="image/*">
+                </div>
+            </div><br>
             <div class="form-group">
                 <label for="email" class="inputGroup">이메일</label><br>
                 <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required>
+                <div class="helper-text">
+                    * 이메일을 작성해주세요.
+                </div>
             </div>
             <div class="form-group">
                 <label for="password" class="inputGroup">비밀번호</label>
                 <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+                <div class="helper-text">
+                    * 비밀번호를 입력해주세요.
+                </div>
             </div>          
             <div class="form-group">
                 <label for="passwordConfirm" class="inputGroup">비밀번호 확인</label>
                 <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" required>
+                <div class="helper-text">
+                    * 비밀번호를 입력해주세요.
+                </div>
             </div>
             <div class="form-group">
                 <label for="nickname" class="inputGroup">닉네임</label>
                 <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요" required>
+                <div class="helper-text">
+                    * 닉네임을 입력해주세요.
+                </div>
             </div>
-            <button type="submit" class="signup-button">회원가입</button>
+            <button type="submit" class="signup-button" id="signupButton">회원가입</button>
             <div class="form-footer">
                 <a href="/login" class="signup-link">로그인하러 가기</a>
             </div>

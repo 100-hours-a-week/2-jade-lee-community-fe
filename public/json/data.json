@@ -1,0 +1,58 @@
+[
+  {
+      "board": {
+          "id": 1,
+          "title": "제목1",
+          "writer": "작성자 이름",
+          "date": "2024-11-11 00:00:00",
+          "content": "게시글 내용",
+          "image": "/img/sample.png",
+          "likes": 10,
+          "views": 100,
+          "comments": [
+              {
+                  "id": 1,
+                  "writer": "댓글 작성자",
+                  "date": "2024-11-11",
+                  "content": "댓글 내용",
+                  "image": "/img/profile.png"
+              },
+              {
+                  "id": 2,
+                  "writer": "다른 댓글 작성자",
+                  "date": "2024-11-11",
+                  "content": "다른 댓글 내용",
+                  "image": "/img/profile2.png"
+              }
+          ]
+      }
+  },
+  {
+    "board": {
+        "id": 2,
+        "title": "제목2",
+        "writer": "작성자 이름",
+        "date": "2024-11-11",
+        "content": "게시글 내용",
+        "image": "/img/sample.png",
+        "likes": 10,
+        "views": 100,
+        "comments": [
+            {
+                "id": 1,
+                "writer": "댓글 작성자",
+                "date": "2024-11-11 00:00:00",
+                "content": "댓글 내용",
+                "image": "/img/profile.png"
+            },
+            {
+                "id": 2,
+                "writer": "다른 댓글 작성자",
+                "date": "2024-11-11",
+                "content": "다른 댓글 내용",
+                "image": "/img/profile2.png"
+            }
+        ]
+    }
+}
+]

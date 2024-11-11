@@ -77,24 +77,33 @@ font-weight: 400;
     box-sizing: border-box; 
 }
 
+/* 기본 상태 */
 .signup-button {
     width: 100%; 
     max-width: 400px; 
     padding: 10px;
-    background-color: #6e9cd7; 
+    background-color: #D9D9D9; /* 기본 색상은 비활성 상태 (회색) */
     color: white;
     border: none;
-    cursor: pointer; 
+    cursor: not-allowed;  /* 비활성 상태에서 클릭할 수 없게 처리 */
 }
-/* 호버 상태 */
-.signup-button:hover{
-    background-color: #7F6AEE;
-  }
-  
-  /* 비호버 상태 (기본) */
-  .signup-button:active{
+
+/* 유효성 검사 통과 시 활성화된 상태 */
+.signup-button.active {
+    background-color: #7F6AEE; /* 활성화 상태 색상 */
+    cursor: pointer; /* 클릭 가능하게 처리 */
+}
+
+/* 비활성 상태 (기본) */
+.signup-button:active {
     background-color: #ACA0EB;
-  }
+}
+/* 활성화된 상태 */
+#signupButton:not([disabled]) {
+    background-color: blue; /* 원하는 활성화 상태의 색상 */
+    color: white;
+    cursor: pointer;
+}
 
 
 .form-footer {
@@ -113,14 +122,7 @@ font-weight: 400;
     text-decoration: underline;
 }
 
-/* 프로필 이미지 스타일 */
-#imagePreview {
-    width: 100px; 
-    height: 100px;
-    border-radius: 50%; 
-    cursor: pointer;
-    object-fit: cover; 
-}
+
 
 /* 숨겨진 파일 선택 버튼 */
 #profileImage {
@@ -128,22 +130,25 @@ font-weight: 400;
 }
 
 #profileImageLabel {
-    position: absolute;
     top: 0;
     left: 0;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
+.image-container {
+    text-align: center; /* 이미지 중앙 정렬 */
+}
+
 #imagePreview {
-    width: 100px;
-    height: 100px;
+    width: 149px;
+    height: 149px;
     border-radius: 50%;
     cursor: pointer;
     object-fit: cover;
     display: inline-block;
+    margin: 0 auto; /* 가운데 정렬 */
 }
-
 
 .inputGroup{
     margin-bottom: 100px;
@@ -182,3 +187,11 @@ font-weight: 400;
 .dropdown-content.show {
     display: block;
 }
+
+
+.helper-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: red;
+    margin-top: 4px;
+  }

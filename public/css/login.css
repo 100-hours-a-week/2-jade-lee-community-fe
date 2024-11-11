@@ -140,3 +140,10 @@ hr {
 .dropdown-content a:hover {
   background-color: lightgray;
 }
+
+.helper-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+  margin-top: 4px;
+}

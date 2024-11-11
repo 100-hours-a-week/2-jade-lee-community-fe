@@ -1,88 +1,122 @@
 import express from 'express';
 import timeout from 'connect-timeout';
-import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import userRoutes from './routes/userRoutes.js';
-import boardRoutes from './routes/boardRoutes.js';
-import commentRoutes from './routes/commentRoutes.js';
 import dotenv from 'dotenv';
-import colors from 'colors';
-import moment from 'moment';
-import mysql from 'mysql2';
-import path from 'path'; // 추가된 import
-import { fileURLToPath } from 'url'; // 추가된 import
-import { dirname } from 'path'; // 추가된 import
-
-// 현재 모듈의 디렉토리 이름 정의
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// 환경 변수 로드
+import path, { dirname } from 'path'; 
+import { fileURLToPath } from 'url'; 
+import fs from 'fs';  // fs 모듈을 import로 추가
+import multer from 'multer';
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const uploadDir = path.join(__dirname, 'uploads');
 const app = express();
-const port = process.env.PORT || 3000; // .env에서 포트를 가져오거나 기본값 3000 사용
+const port = process.env.PORT || 3000;
+const jsonFilePath = path.join(__dirname, 'public', 'json', 'users.json'); // 수정된 JSON 파일 경로 설정
 
-// 정적 파일 서빙 설정
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());  // JSON 형식 데이터를 파싱
 
+// 파일 업로드 설정
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // 업로드 폴더 설정
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // 파일명에 타임스탬프 추가
+    }
+});
 
-// MySQL 연결 설정
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
+const upload = multer({ storage: storage });
+app.post('/signup', upload.single('profileImage'), (req, res) => {
+    const userData = {
+        email: req.body.email,
+        password: req.body.password,
+        nickname: req.body.nickname,
+        profileImage: req.file ? req.file.path : null // 업로드된 이미지 경로
+    };
+
+    // 기존 users.json 파일을 읽고 데이터 추가
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('파일을 읽는 중 오류가 발생했습니다.', err);
+            return res.status(500).json({ error: '파일을 읽는 중 오류가 발생했습니다.' }); 
+        }
+        let users = [];
+        if (data) {
+            try {
+                users = JSON.parse(data); // 기존 사용자 데이터 읽기
+            } catch (parseErr) {
+                console.error('JSON 파싱 오류:', parseErr);
+                return res.status(500).json({ error: '사용자 데이터 파싱 오류' });
+            }
+        }
+        users.push(userData);
+        // 데이터를 다시 파일에 저장
+        fs.writeFile(jsonFilePath, JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error('파일을 저장하는 중 오류가 발생했습니다.', err);
+                return res.status(500).json({ error: '파일을 저장하는 중 오류가 발생했습니다.' });
+            }
+            res.status(200).json({ message: '회원가입이 완료되었습니다.' });
+        });
+    });
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    // users.json 파일에서 사용자 데이터 읽기
+    fs.readFile(jsonFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('파일을 읽는 중 오류가 발생했습니다.', err);
+            return res.status(500).json({ error: '파일을 읽는 중 오류가 발생했습니다.' });
+        }
+
+        let users = [];
+        if (data) {
+            try {
+                users = JSON.parse(data); // 기존 사용자 데이터 읽기
+            } catch (parseErr) {
+                console.error('JSON 파싱 오류:', parseErr);
+                return res.status(500).json({ error: '사용자 데이터 파싱 오류' });
+            }
+        }
+
+        // 사용자 이메일과 비밀번호 확인
+        const user = users.find(user => user.email === email && user.password === password);
+        if (user) {
+            // 로그인 성공
+            res.status(200).json({ message: '로그인 성공' });
+        } else {
+            // 로그인 실패
+            res.status(401).json({ error: '이메일 또는 비밀번호가 잘못되었습니다.' });
+        }
+    });
 });
 
 // 미들웨어 설정
-app.use(timeout('5s')); 
-app.use(express.json()); 
-app.use(helmet()); 
+app.use(timeout('5s'));
+app.use(express.json());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            "default-src": ["'self'"],
+            "img-src": ["'self'", "data:", "blob:"],
+            "script-src": ["'self'", "'unsafe-inline'"],
+        },
+    },
+}));
 
-// 속도 제한 설정
-const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, 
-    max: 100, 
-    message: '너무 많은 요청을 보내셨습니다. 잠시 후 다시 시도해 주세요.'
-});
-app.use(limiter); 
-
-// SQL 쿼리 실행 및 콘솔 로깅 함수
-function executeQuery(sql, params, res) {
-    const startTime = moment();
-    db.query(sql, params, (error, results) => {
-        const endTime = moment();
-        const duration = endTime.diff(startTime, 'milliseconds');
-        const currentTime = startTime.format('YYYY-MM-DD HH:mm:ss');
-
-        if (error) {
-            console.error(`[${currentTime}] SQL Error:`.red, error);
-            res.status(500).send('Database error');
-        } else {
-            console.log(`[${currentTime}]`.green + ` SQL Query:`.yellow, sql);
-            console.log(`Execution time: ${duration} ms`.cyan);
-            res.status(200).json(results);
-        }
-    });
-}
-
-// 라우트 설정
-app.use('/api', userRoutes);
-app.use('/api', boardRoutes); // Board 라우트 추가
-app.use('/api', commentRoutes); // Comment 라우트 추가
-
-// 로그인 페이지 제공
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'login.html')); // 로그인 페이지 제공
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
-// 회원가입 페이지 라우트 추가
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'signup.html'));
 });
 
-// 회원가입 페이지 라우트 추가
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
@@ -111,7 +145,13 @@ app.get('/changePassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'changePassword.html'));
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('서버에서 문제가 발생했습니다.');
+});
+
 // 서버 실행
 app.listen(port, () => {
-    console.log(`서버가 ${port}번 포트에서 실행 중입니다.`.cyan);
+    console.log(`서버가 ${port}번 포트에서 실행 중입니다.`);
 });

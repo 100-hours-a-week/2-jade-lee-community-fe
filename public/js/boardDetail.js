@@ -3,11 +3,74 @@ document.addEventListener("DOMContentLoaded", function () {
     const commentModal = document.getElementById('commentDeleteModal'); // 댓글 삭제 모달
     const closeButtons = document.querySelectorAll('.close'); // 모든 모달 닫기 버튼
 
-    // 드롭다운 관련 변수
+    async function loadBoardData() {
+        try {
+            const response = await fetch('/json/data.json');
+            const data = await response.json();
+    
+            const urlParams = new URLSearchParams(window.location.search);
+            const boardId = urlParams.get('id');  
+    
+            const boardData = data.find(boardItem => boardItem.board.id == boardId)?.board;
+    
+            if (!boardData) {
+                console.error('해당 게시글을 찾을 수 없습니다.');
+                return;
+            }
+    
+            document.getElementById('postTitle').textContent = boardData.title || "제목 없음";
+            document.getElementById('writerName').textContent = boardData.writer || "작성자 없음";
+            document.getElementById('postDate').textContent = boardData.date || "날짜 없음";
+            document.getElementById('postContent').textContent = boardData.content || "내용 없음";
+    
+            // 게시글 이미지 설정
+            const postImage = document.getElementById('postImage');
+            postImage.src = boardData.image || "/img/profile.png"; // 이미지가 없으면 기본 프로필 이미지 사용
+    
+            document.getElementById('likeCount').innerHTML = `${boardData.likes || 0}<br>좋아요수`;
+            document.getElementById('viewCount').innerHTML = `${boardData.views || 0}<br>조회수`;
+    
+            const comments = boardData.comments || [];
+            document.getElementById('commentCount').innerHTML = `${comments.length}<br>댓글`;
+    
+            const commentContainer = document.getElementById('commentContainer');
+            commentContainer.innerHTML = ''; 
+    
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('commentContainer');
+    
+                commentDiv.innerHTML = `
+                    <div class="commentWriteInfo">
+                        <img src="${comment.image || '/img/profile.png'}" class="commentWriter" alt="댓글 작성자 프로필"/>
+                        &nbsp;&nbsp;
+                        <p>${comment.writer || "익명"}</p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>${comment.date || "날짜 없음"}</span>
+                        <div class="boardUpdate2">
+                            <button class="edit-btn">수정</button>
+                            <button class="confirm-button">삭제</button>
+                        </div>
+                    </div>
+                    <div class="commentContentContainer">
+                        ${comment.content || "내용 없음"}
+                    </div>
+                `;
+                
+                commentContainer.appendChild(commentDiv);
+            });
+            
+        } catch (error) {
+            console.error('데이터를 불러오는 중 오류 발생:', error);
+        }
+    }
+    
+    // JSON 데이터 불러오기 실행
+    loadBoardData();
+
     const profileImg = document.querySelector('.profile-img');
     const dropdownContent = document.querySelector('.dropdown-content');
 
-    // 드롭다운 메뉴 토글 및 외부 클릭 시 닫기
     profileImg?.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -20,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 모달 표시 및 닫기 함수
     function toggleModal(modal, shouldShow) {
         if (modal) {
             modal.style.display = shouldShow ? 'block' : 'none';
@@ -32,29 +94,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteButton = document.querySelector('.boardUpdate button:last-child');
     if (deleteButton) {
         deleteButton.addEventListener('click', () => toggleModal(modal, true));
-    } else {
-        console.error('게시글 삭제 버튼을 찾을 수 없습니다.');
     }
 
-    // 댓글 삭제 버튼
-    const commentDeleteButton = document.querySelector('.boardUpdate2 button:last-child');
-    if (commentDeleteButton) {
-        commentDeleteButton.addEventListener('click', () => toggleModal(commentModal, true));
-    } else {
-        console.error('댓글 삭제 버튼을 찾을 수 없습니다.');
+    // 댓글 삭제 및 수정 버튼에 이벤트 위임 적용
+    const commentContainer = document.getElementById('commentContainer');
+    if (commentContainer) {
+        commentContainer.addEventListener('click', function (event) {
+            const targetButton = event.target;
+            if (targetButton.classList.contains('confirm-button')) {
+                // 댓글 삭제 버튼 클릭 시 모달 열기
+                toggleModal(commentModal, true);
+            } else if (targetButton.classList.contains('edit-btn')) {
+                // 댓글 수정 버튼 클릭 시 수정 모달 열기
+                alert("댓글 수정 기능 추가 예정!");
+            }
+        });
     }
 
-    // 수정 버튼 클릭 시 보드 업데이트 페이지로 이동
     const updateButton = document.getElementById('updateButton');
     if (updateButton) {
         updateButton.addEventListener('click', () => {
-            window.location.href = '/boardUpdate'; // 보드 업데이트 페이지로 리다이렉트
+            window.location.href = '/boardUpdate';
         });
-    } else {
-        console.error('수정 버튼을 찾을 수 없습니다.');
     }
 
-    // 모든 모달 닫기 버튼 설정
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             toggleModal(modal, false);
@@ -62,21 +125,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 게시글 삭제 확인 버튼 설정
     document.getElementById('confirmDelete')?.addEventListener('click', () => {
         toggleModal(modal, false);
         alert("게시글이 삭제되었습니다!");
-        // 여기에 실제 게시글 삭제 로직 추가
     });
 
-    // 댓글 삭제 확인 버튼 설정
     document.getElementById('confirmCommentDelete')?.addEventListener('click', () => {
         toggleModal(commentModal, false);
         alert("댓글이 삭제되었습니다!");
-        // 여기에 실제 댓글 삭제 로직 추가
     });
 
-    // 모달 외부 클릭 시 닫기
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             toggleModal(modal, false);

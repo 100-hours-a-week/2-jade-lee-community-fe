@@ -46,7 +46,8 @@ hr {
 .post-container{
     border: 1px solid rgb(198, 191, 191);
     border-radius: 10px;
-
+    width: 592px;
+    margin-bottom: 10px;
 }
 .post-item{
     padding:10px;
