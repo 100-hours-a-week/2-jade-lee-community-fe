@@ -39,8 +39,22 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
     }
 
+    // 사용자의 정보 가져오기 (users.json)
+    fetch('/json/users.json') // 사용자의 정보가 담긴 JSON 파일 경로
+        .then(response => response.json())
+        .then(users => {
+            // 예시로 첫 번째 사용자를 현재 사용자로 가정
+            const currentUser = users[0];  // 실제로는 로그인한 사용자 정보를 가져와야 함
+            const profileImage = currentUser.profileImage;
+
+            // 프로필 이미지 변경
+            const profileImageElement = document.querySelector('.profile-img img');
+            profileImageElement.src = `/${profileImage}`; // 프로필 이미지 경로를 실제 이미지로 업데이트
+        })
+        .catch(error => console.error('Error loading users:', error));
+
     // 게시글 목록을 JSON 파일로부터 불러오기
-    fetch('/json/posts.json') // JSON 파일 경로를 설정
+    fetch('/json/data.json') // 게시글 데이터 경로 설정
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -69,12 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 postItem.innerHTML = `
                     <h3 class="post-title" id="post${post.id}">&nbsp;&nbsp;${truncatedTitle}</h3>
                     <div class="info-flex">
-                        <div class="post-info1">&nbsp;&nbsp;&nbsp;좋아요 ${formatNumber(post.likes)} 댓글 ${formatNumber(post.comments)} 조회수 ${formatNumber(post.views)}</div>
+                        <div class="post-info1">&nbsp;&nbsp;&nbsp;좋아요 ${formatNumber(post.likes)} 댓글 ${formatNumber(post.commentCount)} 조회수 ${formatNumber(post.views)}</div>
                         <div class="post-info2">${formatDate(post.date)}</div>
                     </div>
                     <hr>
                     <div class="author-flex">&nbsp;&nbsp;&nbsp;
-                        <img src="/img/profile.png" class="content-writer"/>
+                        <img src="${post.contentWriterImage}" class="content-writer"/>
                         <h4>&nbsp;&nbsp;${post.author}</h4>
                     </div>
                 `;

@@ -28,25 +28,28 @@
             <p>프로필 사진*</p>
         </div>
         <div class="form-group" style="position: relative; text-align: center;">
-            <label id="profileImageLabel" for="profileImage"></label>
-            <img id="imagePreview" src="/img/117885.png" alt="프로필 이미지 미리보기" style="cursor: pointer;">
+            <label id="profileImageLabel" for="profileImage" style="cursor: pointer;"></label>
+            <img id="imagePreview" src="/uploads/1731557381821.jpeg" alt="프로필 이미지 미리보기" style="cursor: pointer;">
+            <!-- 프로필 이미지 클릭 시 input이 활성화되도록 -->
             <input type="file" id="profileImage" name="profileImage" accept="image/*" style="display: none;">
-        </div><br><br>
+        </div>
+        <br><br>
 
         <div class="email">이메일</div><br>
-        <div class="emailValue">disney1026@naver.com</div><br>
+        <div class="emailValue"></div><br>
         <div class="nickname">닉네임<br><br>
             <input type="text" id="nickname" placeholder="기존 닉네임"/>
+            <div id="nicknameHelperText" class="helper-text" style="color: red; font-size: 12px;"></div>
         </div><br><br>
 
         <div class="edit-button">
-            <button id="editButton" class="edit-button">수정</button> <!-- ID 추가 -->
+            <button id="editButton" class="edit-button">수정</button> 
         </div><br>
         <div class="delete-button">
             <button class="delete-button">회원 탈퇴</button>
         </div><br><br><br>
         <div class="edit-submit-button">
-            <button class="edit-submit-button">수정완료</button>
+            <button id="confirmEditButton" class="edit-submit-button">수정완료</button>
         </div><br>
     </div>
 
@@ -62,7 +65,22 @@
             </div>
         </div>
     </div>
-    
+    <!-- 삭제 확인 모달 -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>정말로 회원 탈퇴하시겠습니까?</h2>
+            <div class="modal-buttons">
+                <button id="cancelDelete" class="cancel-button">취소</button>
+                <button id="confirmDeleteButton" class="confirm-button">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        회원정보가 수정되었습니다!
+    </div>
+
     <script src="/js/myinfo.js"></script>
 </body>
 </html>

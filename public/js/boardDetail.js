@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);
             const boardId = urlParams.get('id');  
     
-            const boardData = data.find(boardItem => boardItem.board.id == boardId)?.board;
-    
+            // 수정된 부분: JSON 구조에 맞게 게시글을 찾음
+            const boardData = data.find(boardItem => boardItem.id == boardId);
             if (!boardData) {
                 console.error('해당 게시글을 찾을 수 없습니다.');
                 return;

@@ -1,58 +1,59 @@
 [
-  {
-      "board": {
+    {
+      "id": 1,
+      "title": "제목 1",
+      "author": "작성자 1",
+      "likes": 10,
+      "commentCount": 5,
+      "views": 100,
+      "date": "2024-11-11 00:00:00",
+      "content": "게시글 내용",
+      "image": "/img/images.jpeg",
+      "contentWriterImage":"/img/117885.png",
+      "comments": [
+        {
           "id": 1,
-          "title": "제목1",
-          "writer": "작성자 이름",
-          "date": "2024-11-11 00:00:00",
-          "content": "게시글 내용",
-          "image": "/img/sample.png",
-          "likes": 10,
-          "views": 100,
-          "comments": [
-              {
-                  "id": 1,
-                  "writer": "댓글 작성자",
-                  "date": "2024-11-11",
-                  "content": "댓글 내용",
-                  "image": "/img/profile.png"
-              },
-              {
-                  "id": 2,
-                  "writer": "다른 댓글 작성자",
-                  "date": "2024-11-11",
-                  "content": "다른 댓글 내용",
-                  "image": "/img/profile2.png"
-              }
-          ]
-      }
-  },
-  {
-    "board": {
-        "id": 2,
-        "title": "제목2",
-        "writer": "작성자 이름",
-        "date": "2024-11-11",
-        "content": "게시글 내용",
-        "image": "/img/sample.png",
-        "likes": 10,
-        "views": 100,
-        "comments": [
-            {
-                "id": 1,
-                "writer": "댓글 작성자",
-                "date": "2024-11-11 00:00:00",
-                "content": "댓글 내용",
-                "image": "/img/profile.png"
-            },
-            {
-                "id": 2,
-                "writer": "다른 댓글 작성자",
-                "date": "2024-11-11",
-                "content": "다른 댓글 내용",
-                "image": "/img/profile2.png"
-            }
-        ]
+          "writer": "댓글 작성자",
+          "date": "2024-11-11",
+          "content": "댓글 내용",
+          "image": "/img/117885.png"
+        },
+        {
+          "id": 2,
+          "writer": "다른 댓글 작성자",
+          "date": "2024-11-11",
+          "content": "다른 댓글 내용",
+          "image": "/img/profile2.png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "제목 2",
+      "author": "작성자 2",
+      "likes": 20,
+      "commentCount": 10,
+      "views": 200,
+      "date": "2024-11-12 00:00:00",
+      "content": "게시글 내용",
+      "image": "/img/sample2.png",
+      "contentWriterImage":"/img/profile.png",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "댓글 작성자",
+          "date": "2024-11-12",
+          "content": "댓글 내용",
+          "image": "/img/profile.png"
+        },
+        {
+          "id": 2,
+          "writer": "다른 댓글 작성자",
+          "date": "2024-11-12",
+          "content": "다른 댓글 내용",
+          "image": "/img/profile2.png"
+        }
+      ]
     }
-}
-]
+  ]
+  

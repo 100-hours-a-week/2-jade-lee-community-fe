@@ -238,3 +238,37 @@ hr {
     border-radius: 5px; 
     cursor: pointer; 
 }
+.helper-text {
+    display: none; /* 기본적으로 숨김 */
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.helper-text.show {
+    display: block; /* .show 클래스가 있을 때 보이도록 설정 */
+}
+/* Toast 스타일 */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
