@@ -44,5 +44,5 @@ app.get('/user/editPassword', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://3.34.40.191:${PORT}`);
+    console.log(`Server running on http://43.201.148.13:${PORT}`);
 });
