@@ -130,7 +130,7 @@ async function signup() {
     }
 
     try {
-        const response = await fetch('http://3.34.40.191:8000/api/auth/signup', {
+        const response = await fetch('http://43.201.148.13:8000/api/auth/signup', {
             method: 'POST',
             body: formData,
             credentials: 'include'
